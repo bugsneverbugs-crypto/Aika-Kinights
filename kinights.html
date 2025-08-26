@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AIKA KINIGHTS — MMORPG Private Server</title>
+  <meta name="description" content="AIKA KINIGHTS — servidor privado de Aika Online. Registre-se, leia o guia e apoie via doação. Open Beta se aproximando!" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #0b0f17;
+      --bg-2: #0f1522;
+      --card: #121a2a;
+      --text: #e6eefc;
+      --muted: #9cb3d3;
+      --accent: #69e1ff;
+      --accent-2:#6cf7b3;
+      --danger: #ff5470;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+    }
+    *{box-sizing: border-box}
+    html,body{margin:0;padding:0;background:linear-gradient(180deg,var(--bg),var(--bg-2));color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block;border-radius:12px}
+    .container{max-width:1200px;margin:0 auto;padding:0 20px}
+
+    /* Header */
+    header{position:sticky;top:0;z-index:50;background:rgba(11,15,23,.7);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.07)}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;gap:10px;align-items:center;font-family:Oxanium,Inter,sans-serif}
+    .logo{
+      width:40px;height:40px;border-radius:12px;
+      background: radial-gradient(circle at 30% 30%, var(--accent), #3fb3ff 40%, #004d7a);
+      box-shadow:0 0 20px rgba(105,225,255,.35) inset, 0 0 30px rgba(105,225,255,.3);
+    }
+    .brand h1{font-size:1.15rem;letter-spacing:.6px;margin:0;font-weight:800}
+
+    .links{display:flex;gap:14px;align-items:center}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.03);transition:.2s;box-shadow:var(--shadow);font-weight:600}
+    .btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.06)}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#001018;border:none}
+    .btn.primary:hover{filter:saturate(1.1);}
+
+    /* Mobile menu */
+    #menu-toggle{display:none}
+    .hamb{display:none;gap:8px;flex-direction:column;cursor:pointer}
+    .hamb span{width:26px;height:2px;background:#cfe7ff;border-radius:2px}
+    @media (max-width:860px){
+      .links{display:none}
+      .hamb{display:flex}
+      #menu-toggle:checked ~ .drawer{display:flex}
+      .drawer{position:absolute;left:0;right:0;top:62px;display:none;flex-direction:column;gap:10px;padding:14px;background:rgba(15,21,34,.98);border-bottom:1px solid rgba(255,255,255,.08)}
+      .drawer a{padding:12px;border-radius:12px}
+      .drawer .btn{box-shadow:none}
+    }
+
+    /* Hero */
+    .hero{position:relative;isolation:isolate}
+    .hero::before{
+      content:"";position:absolute;inset:0;z-index:-2;
+      /* 👉 Substitua a URL abaixo por uma imagem relacionada ao Aika Online */
+      background:url('https://mir-s3-cdn-cf.behance.net/projects/404/669fa1180828407.Y3JvcCwxMDgwLDg0NCwwLDExNw.jpg') center/cover no-repeat;
+      filter:saturate(1) brightness(.6);
+    }
+    .hero::after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 60% at 20% 20%, rgba(105,225,255,.25), transparent 60%), radial-gradient(60% 60% at 80% 20%, rgba(108,247,179,.2), transparent 60%)}
+    .hero-wrap{padding:90px 0 70px}
+    .eyebrow{display:inline-flex;gap:8px;align-items:center;padding:8px 12px;border-radius:999px;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.12)}
+    .eyebrow .dot{width:8px;height:8px;border-radius:999px;background:var(--accent-2);box-shadow:0 0 10px var(--accent-2)}
+    .title{font-family:Oxanium,Inter,sans-serif;font-size:clamp(28px,5vw,52px);line-height:1.05;margin:16px 0}
+    .subtitle{max-width:720px;color:var(--muted);font-size:clamp(14px,2.2vw,18px)}
+    .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+
+    /* Sections */
+    section{padding:60px 0;border-top:1px solid rgba(255,255,255,.06)}
+    .grid{display:grid;gap:18px}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    .grid.cols-2{grid-template-columns:repeat(2,1fr)}
+    @media (max-width:980px){.grid.cols-3{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){.grid.cols-3,.grid.cols-2{grid-template-columns:1fr}}
+
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+    .card h3{margin:0 0 6px}
+    .card p{margin:0;color:#c7d7f2}
+
+    .section-title{font-family:Oxanium,Inter,sans-serif;font-size:26px;margin:0 0 14px}
+    .muted{color:var(--muted)}
+
+    /* Forms */
+    .form{display:grid;gap:12px}
+    .input, select, textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:var(--text)}
+    .hint{font-size:12px;color:var(--muted)}
+
+    .badges{display:flex;gap:10px;flex-wrap:wrap}
+    .badge{padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);font-size:12px}
+
+    /* Footer */
+    footer{padding:26px 0;color:#aac1e6}
+    .foot{display:flex;gap:12px;align-items:center;justify-content:space-between}
+    .copy{font-size:13px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <h1>AIKA KINIGHTS</h1>
+      </div>
+
+      <input type="checkbox" id="menu-toggle" aria-label="Abrir menu" />
+      <label class="hamb" for="menu-toggle" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </label>
+
+      <nav class="links">
+        <a class="btn" href="#registre">Registre</a>
+        <a class="btn" href="#guia">Guia</a>
+        <a class="btn" href="#doacao">Doação</a>
+        <a class="btn" href="#">Discord</a>
+        <a class="btn primary" href="#download">Download</a>
+      </nav>
+
+      <nav class="drawer">
+        <a href="#registre">Registre</a>
+        <a href="#guia">Guia</a>
+        <a href="#doacao">Doação</a>
+        <a href="#">Discord</a>
+        <a href="#download" class="btn primary">Download</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO / BANNER -->
+    <section class="hero">
+      <div class="container hero-wrap">
+        <span class="eyebrow"><span class="dot"></span> MMORPG Clássico — Servidor BR</span>
+        <h2 class="title">OPEN BETA <span style="color:var(--accent)">SE APROXIMANDO</span></h2>
+        <p class="subtitle">Prepare-se para batalhas de nações, dungeons desafiadoras e aquele PvP raiz que a comunidade ama. Traga sua guild e garanta seu nome no lançamento!</p>
+        <div class="cta">
+          <a class="btn primary" href="#registre">Quero Me Registrar</a>
+          <a class="btn" href="#guia">Ler o Guia</a>
+          <a class="btn" href="#doacao">Apoiar o Projeto</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOBRE / FEATURES -->
+    <section id="sobre">
+      <div class="container">
+        <h3 class="section-title">Por que jogar no <strong>AIKA KINIGHTS</strong>?</h3>
+        <p class="muted">Um servidor estável, com progressão justa e eventos planejados para a comunidade.</p>
+        <div class="grid cols-3" style="margin-top:16px">
+          <div class="card"><h3>Balanceamento Moderno</h3><p>Classes ajustadas com foco em diversão e competitividade.</p></div>
+          <div class="card"><h3>Eventos Semanais</h3><p>Guerras, torneios e drops especiais pra animar o PvP e PvE.</p></div>
+          <div class="card"><h3>Equipe Presente</h3><p>Moderação ativa e suporte rápido via Discord.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREENSHOTS (substitua as imagens pelos seus assets do Aika) -->
+    <section id="midia">
+      <div class="container">
+        <h3 class="section-title">Imagens do jogo</h3>
+        <p class="muted">.</p>
+        <div class="grid cols-3" style="margin-top:12px">
+          <img alt="Screenshot 1" src="https://static.wikia.nocookie.net/aika-br/images/1/15/Aika_online.jpg/revision/latest?cb=20160930001618&path-prefix=pt-br" />
+          <img alt="Screenshot 2" src="https://pesadosgamers.com.br/wp-content/uploads/2024/09/Aika-1.webp" />
+          <img alt="Screenshot 3" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgpQxhXBVNwVyYJcgTrJAQcI7IetIRNq7hQoyT-hU6qFaSe8S726fAoLdvzXDWzCIX3RxGKXm2b2_eBKorMy3BzA-Bq2x3PtOHTGEWCTQyDX7bEJGIdQKxGexzFe12JBC4Omish-VjFLV0/s1600/wr+avan%C3%A7o.PNG" />
+        </div>
+      </div>
+    </section>
+
+    <!-- REGISTRE-SE -->
+    <section id="registre">
+      <div class="container">
+        <h3 class="section-title">Registre</h3>
+        <p class="muted">Crie sua conta para o Open Beta. (Formulário apenas ilustrativo.)</p>
+        <form class="grid cols-2 card form" onsubmit="event.preventDefault(); alert('Registro enviado! (exemplo)');">
+          <div>
+            <label>Usuário</label>
+            <input class="input" type="text" placeholder="Seu nick" required />
+          </div>
+          <div>
+            <label>Email</label>
+            <input class="input" type="email" placeholder="voce@email.com" required />
+          </div>
+          <div>
+            <label>Senha</label>
+            <input class="input" type="password" placeholder="Mín. 6 caracteres" required />
+            <div class="hint">Nunca reutilize senha de outros serviços.</div>
+          </div>
+          <div>
+            <label>Discord (opcional)</label>
+            <input class="input" type="text" placeholder="seunick#0000" />
+          </div>
+          <div style="grid-column:1/-1;display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between">
+            <div class="badges">
+              <span class="badge">Sem Pay2Win</span>
+              <span class="badge">Servidores no BR</span>
+              <span class="badge">Eventos Semanais</span>
+            </div>
+            <button class="btn primary" type="submit">Criar Conta</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- GUIA -->
+    <section id="guia">
+      <div class="container">
+        <h3 class="section-title">Guia</h3>
+        <p class="muted">Tudo para começar bem no AIKA KINIGHTS.</p>
+        <div class="grid cols-3" style="margin-top:12px">
+          <a class="card" href="#" target="_blank">
+            <h3>Instalação e Download</h3>
+            <p>Requisitos, instalação e primeiros passos. (Link para PDF/guia.)</p>
+          </a>
+          <a class="card" href="#" target="_blank">
+            <h3>Progressão Inicial</h3>
+            <p>Rotas de up, equipamentos e dicas de farm.</p>
+          </a>
+          <a class="card" href="#" target="_blank">
+            <h3>Nações & PvP</h3>
+            <p>Regras, horários e como participar das guerras.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- DOAÇÃO -->
+    <section id="doacao">
+      <div class="container">
+        <h3 class="section-title">Doação</h3>
+        <p class="muted">Apoie o servidor e ajude a manter a infraestrutura online. Benefícios são cosméticos/QoL — sem Pay2Win.</p>
+        <div class="grid cols-2" style="margin-top:12px">
+          <div class="card">
+            <h3>PIX</h3>
+            <p>Chave: <strong>SEU-EMAIL@DOMINIO.COM</strong></p>
+            <p class="hint">Envie o comprovante no Discord para liberar as recompensas.</p>
+            <div class="badges"><span class="badge">Instantâneo</span><span class="badge">BR</span></div>
+          </div>
+          <div class="card">
+            <h3>PayPal</h3>
+            <p><a class="btn" href="#" target="_blank">Abrir Link do PayPal</a></p>
+            <p class="hint">Alternativa internacional.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DOWNLOAD / CLIENTE -->
+    <section id="download">
+      <div class="container">
+        <h3 class="section-title">Download do Cliente</h3>
+        <div class="card">
+          <p class="muted">Disponível próximo ao Open Beta.</p>
+          <div class="cta" style="margin-top:8px">
+            <a class="btn primary" href="#" aria-disabled="true">Em breve</a>
+            <a class="btn" href="#">Notas de Patch</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container foot">
+      <div class="brand" style="gap:8px">
+        <div class="logo" aria-hidden="true"></div>
+        <strong>AIKA KINIGHTS</strong>
+      </div>
+      <div class="copy">© <span id="y"></span> AIKA KINIGHTS — Comunidade BR. Não afiliado à Hanbitsoft / Joymax.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Atualiza ano automaticamente
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
